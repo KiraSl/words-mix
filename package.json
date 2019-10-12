@@ -1,0 +1,31 @@
+{
+  "name": "words-mix",
+  "version": "1.0.0",
+  "description": "Form the sentence by dragging and dropping words in the correct order. ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KiraSl/words-mix.git"
+  },
+  "keywords": [
+    "game",
+    "sentence",
+    "words",
+    "drag",
+    "drop",
+    "mix",
+    "order"
+  ],
+  "author": "Kira Slobodina & Sam De Maeyer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KiraSl/words-mix/issues"
+  },
+  "homepage": "https://github.com/KiraSl/words-mix#readme",
+  "dependencies": {
+    "eslint": "^6.5.1"
+  }
+}
