@@ -16,7 +16,33 @@ function init() {
 }
 
 function startGame() {
-  randomiseSentence();
+  let words = randomiseSentence('Hello world my name is Kira');
+  document.querySelector('.container').innerHTML = '';
+
+  const gameContainer = document.createElement('div');
+  gameContainer.classList.add('game-container');
+
+  const gameArea = document.createElement('div');
+  gameArea.classList.add('game-area');
+
+  const wordsWrapper = document.createElement('div');
+  wordsWrapper.classList.add('words-wrapper');
+
+  const wordsList = document.createElement('ul');
+  wordsList.classList.add('words-list');
+  wordsWrapper.appendChild(wordsList);
+
+  words.forEach(function(word) {
+    const listItem = document.createElement('li');
+    listItem.classList.add('word');
+    listItem.innerText = word;
+    listItem.setAttribute('draggable', true);
+    wordsList.appendChild(listItem);
+  });
+
+  gameContainer.appendChild(gameArea);
+  gameContainer.appendChild(wordsWrapper);
+  document.querySelector('.container').appendChild(gameContainer);
 }
 
 var randomiseSentence = function(sentence) {
@@ -24,7 +50,6 @@ var randomiseSentence = function(sentence) {
   return splitSentence.sort(() => Math.random() - 0.5);
 };
 
-randomiseSentence('Hello world my name is Kira');
 init();
 
 module.exports = { randomiseSentence };
