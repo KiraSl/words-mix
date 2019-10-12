@@ -1,3 +1,5 @@
-QUnit.test('hello test', function(assert) {
-  assert.ok(1 == '1', 'Passed!');
+/* eslint-disable no-undef*/
+
+QUnit.test('Test init function', function(assert) {
+  assert.ok(true);
 });
