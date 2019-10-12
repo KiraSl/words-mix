@@ -4,7 +4,7 @@
   "description": "Form the sentence by dragging and dropping words in the correct order. ",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "eslint ."
   },
   "repository": {
     "type": "git",
