@@ -15,6 +15,16 @@ function init() {
   document.querySelector('.container').appendChild(container);
 }
 
-function startGame() {}
+function startGame() {
+  randomiseSentence();
+}
 
+var randomiseSentence = function(sentence) {
+  let splitSentence = sentence.split(' ');
+  return splitSentence.sort(() => Math.random() - 0.5);
+};
+
+randomiseSentence('Hello world my name is Kira');
 init();
+
+module.exports = { randomiseSentence };
