@@ -4,7 +4,7 @@
   "description": "Form the sentence by dragging and dropping words in the correct order. ",
   "main": "index.js",
   "scripts": {
-    "test": "node_modules/.bin/qunit",
+    "test": "node_modules/.bin/cypress run",
     "pretest": "node_modules/.bin/eslint ."
   },
   "repository": {
@@ -31,6 +31,6 @@
   },
   "devDependencies": {
     "eslint": "^6.5.1",
-    "qunit": "^2.9.3"
+    "cypress": "^3.4.1"
   }
 }
