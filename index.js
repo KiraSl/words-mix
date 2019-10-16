@@ -16,7 +16,8 @@ function init() {
 }
 
 function startGame() {
-  let words = randomiseSentence('Hello world my name is Kira');
+  const sentence = 'Hello world my name is Kira';
+  const wordsArray = randomiseSentence(sentence);
   document.querySelector('.container').innerHTML = '';
 
   const gameContainer = document.createElement('div');
@@ -25,31 +26,59 @@ function startGame() {
   const gameArea = document.createElement('div');
   gameArea.classList.add('game-area');
 
+  const dropArea = document.createElement('div');
+  dropArea.classList.add('drop-area');
+
   const wordsWrapper = document.createElement('div');
   wordsWrapper.classList.add('words-wrapper');
 
   const wordsList = document.createElement('ul');
   wordsList.classList.add('words-list');
-  wordsWrapper.appendChild(wordsList);
 
-  words.forEach(function(word) {
+  wordsArray.forEach((word, index) => {
     const listItem = document.createElement('li');
     listItem.classList.add('word');
+    listItem.id = `word-${index}`;
     listItem.innerText = word;
     listItem.setAttribute('draggable', true);
+    listItem.addEventListener('dragstart', dragStart);
+
+    const wordDrop = document.createElement('div');
+    wordDrop.classList.add('word-drop');
+    wordDrop.setAttribute('data-drop-position', index);
+    wordDrop.addEventListener('dragenter', e => e.target.classList.add('drag-over'));
+    wordDrop.addEventListener('dragleave', e => e.target.classList.remove('drag-over'));
+    wordDrop.addEventListener('dragover', e => e.preventDefault());
+    wordDrop.addEventListener('drop', event => dropWord(event, sentence));
+    dropArea.appendChild(wordDrop);
     wordsList.appendChild(listItem);
   });
 
+  wordsWrapper.appendChild(wordsList);
+  gameArea.appendChild(dropArea);
   gameContainer.appendChild(gameArea);
   gameContainer.appendChild(wordsWrapper);
   document.querySelector('.container').appendChild(gameContainer);
 }
 
-var randomiseSentence = function(sentence) {
-  let splitSentence = sentence.split(' ');
+const randomiseSentence = function(sentence) {
+  const splitSentence = sentence.split(' ');
   return splitSentence.sort(() => Math.random() - 0.5);
 };
 
-init();
+function dropWord(event, sentence) {
+  const [draggedWord, draggedID] = event.dataTransfer.getData('text/plain').split(',');
+  const dropPosition = event.target.getAttribute('data-drop-position');
+  const originalPosition = sentence.split(' ').indexOf(draggedWord);
+  if (dropPosition == originalPosition) {
+    document.getElementById(draggedID).remove();
+  }
+  event.target.classList.remove('drag-over');
+}
 
-module.exports = { randomiseSentence };
+function dragStart(event) {
+  event.dataTransfer.setData('text/plain', `${event.target.innerText},${event.target.id}`);
+}
+
+init();
+startGame();

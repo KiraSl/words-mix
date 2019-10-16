@@ -38,6 +38,8 @@
 .game-area {
   width: 75vw;
   height: 100vh;
+  display: flex;
+  align-items: center;
 }
 
 .words-wrapper {
@@ -53,4 +55,22 @@
 
 .words-list {
   list-style: none;
+}
+
+.word-drop {
+  width: 90px;
+  height: 35px;
+  border: 2px dashed #9c9c9c;
+  background-color: #ececec;
+  border-radius: 4px;
+}
+
+.drop-area {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.word-drop.drag-over {
+  background-color: #e0dfdf;
 }
