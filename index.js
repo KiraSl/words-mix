@@ -81,4 +81,3 @@ function dragStart(event) {
 }
 
 init();
-startGame();
