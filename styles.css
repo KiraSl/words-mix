@@ -26,7 +26,51 @@
   font-size: 1rem;
   line-height: 1.5;
   border-radius: 0.25rem;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
   cursor: pointer;
+}
+
+.game-container {
+  display: flex;
+}
+
+.game-area {
+  width: 75vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.words-wrapper {
+  display: flex;
+  border-left: 2px solid red;
+  align-items: center;
+}
+
+.word {
+  font-size: 2rem;
+  padding: 0.5rem 0;
+}
+
+.words-list {
+  list-style: none;
+}
+
+.word-drop {
+  width: 90px;
+  height: 35px;
+  border: 2px dashed #9c9c9c;
+  background-color: #ececec;
+  border-radius: 4px;
+}
+
+.drop-area {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.word-drop.drag-over {
+  background-color: #e0dfdf;
 }

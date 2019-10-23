@@ -1,6 +1,6 @@
 /// <reference types="Cypress" />
 
-context('Splash page', () => { 
+context('Splash page', () => {
   it('should render the default html', () => {
     cy.visit('./index.html');
     cy.get('.container-main-page .button').should('contain', 'Start Game');
