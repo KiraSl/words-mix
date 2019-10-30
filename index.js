@@ -16,7 +16,7 @@ function init() {
 }
 
 function startGame() {
-  const sentence = 'Hello world my name is Kira';
+  const sentence = quotes[getRandomInt(quotes.length)].quote;
   const wordsArray = randomiseSentence(sentence);
   document.querySelector('.container').innerHTML = '';
 
@@ -86,6 +86,10 @@ function dropWord(event, sentence) {
     }, 500);
   }
   event.target.classList.remove('drag-over');
+}
+
+function getRandomInt(max) {
+  return Math.floor(Math.random() * Math.floor(max));
 }
 
 function dragStart(event) {
