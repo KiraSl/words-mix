@@ -70,8 +70,20 @@ function dropWord(event, sentence) {
   const [draggedWord, draggedID] = event.dataTransfer.getData('text/plain').split(',');
   const dropPosition = event.target.getAttribute('data-drop-position');
   const originalPosition = sentence.split(' ').indexOf(draggedWord);
+  const dropBox = event.target;
+
   if (dropPosition == originalPosition) {
     document.getElementById(draggedID).remove();
+    dropBox.innerText = draggedWord;
+    dropBox.classList.add('correct-position');
+  } else {
+    dropBox.classList.add('wrong-position');
+    dropBox.innerText = 'wrong!';
+
+    setTimeout(() => {
+      dropBox.classList.remove('wrong-position');
+      dropBox.innerText = '';
+    }, 500);
   }
   event.target.classList.remove('drag-over');
 }
@@ -79,5 +91,4 @@ function dropWord(event, sentence) {
 function dragStart(event) {
   event.dataTransfer.setData('text/plain', `${event.target.innerText},${event.target.id}`);
 }
-
 init();

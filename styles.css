@@ -63,6 +63,20 @@
   border: 2px dashed #9c9c9c;
   background-color: #ececec;
   border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.4rem;
+}
+
+.word-drop.correct-position {
+  background-color: green;
+  border: 1px solid green;
+  color: #fff;
+}
+
+.word-drop.wrong-position {
+  background-color: rgb(245, 105, 105);
 }
 
 .drop-area {
