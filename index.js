@@ -67,12 +67,16 @@ const randomiseSentence = function(sentence) {
 };
 
 function dropWord(event, sentence) {
-  const [draggedWord, draggedID] = event.dataTransfer.getData('text/plain').split(',');
+  const [draggedWord, draggedID] = event.dataTransfer.getData('text/plain').split('|');
   const dropPosition = event.target.getAttribute('data-drop-position');
-  const originalPosition = sentence.split(' ').indexOf(draggedWord);
+  const originalPositions = [];
   const dropBox = event.target;
-
-  if (dropPosition == originalPosition) {
+  sentence.split(' ').forEach(function(word, index) {
+    if (word === draggedWord) {
+      originalPositions.push(index);
+    }
+  });
+  if (originalPositions.includes(parseInt(dropPosition, 10))) {
     document.getElementById(draggedID).remove();
     dropBox.innerText = draggedWord;
     dropBox.classList.add('correct-position');
@@ -93,6 +97,6 @@ function getRandomInt(max) {
 }
 
 function dragStart(event) {
-  event.dataTransfer.setData('text/plain', `${event.target.innerText},${event.target.id}`);
+  event.dataTransfer.setData('text/plain', `${event.target.innerText}|${event.target.id}`);
 }
 init();
