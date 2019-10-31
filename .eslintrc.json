@@ -10,7 +10,8 @@
     "context": true,
     "it": true,
     "cy": true,
-    "module": true
+    "module": true,
+    "quotes": true
   },
   "parserOptions": {
     "ecmaVersion": 2018

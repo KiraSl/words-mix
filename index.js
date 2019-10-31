@@ -16,7 +16,7 @@ function init() {
 }
 
 function startGame() {
-  const sentence = 'Hello world my name is Kira';
+  const sentence = quotes[getRandomInt(quotes.length)].quote;
   const wordsArray = randomiseSentence(sentence);
   document.querySelector('.container').innerHTML = '';
 
@@ -67,17 +67,36 @@ const randomiseSentence = function(sentence) {
 };
 
 function dropWord(event, sentence) {
-  const [draggedWord, draggedID] = event.dataTransfer.getData('text/plain').split(',');
+  const [draggedWord, draggedID] = event.dataTransfer.getData('text/plain').split('|');
   const dropPosition = event.target.getAttribute('data-drop-position');
-  const originalPosition = sentence.split(' ').indexOf(draggedWord);
-  if (dropPosition == originalPosition) {
+  const originalPositions = [];
+  const dropBox = event.target;
+  sentence.split(' ').forEach(function(word, index) {
+    if (word === draggedWord) {
+      originalPositions.push(index);
+    }
+  });
+  if (originalPositions.includes(parseInt(dropPosition, 10))) {
     document.getElementById(draggedID).remove();
+    dropBox.innerText = draggedWord;
+    dropBox.classList.add('correct-position');
+  } else {
+    dropBox.classList.add('wrong-position');
+    dropBox.innerText = 'wrong!';
+
+    setTimeout(() => {
+      dropBox.classList.remove('wrong-position');
+      dropBox.innerText = '';
+    }, 500);
   }
   event.target.classList.remove('drag-over');
 }
 
-function dragStart(event) {
-  event.dataTransfer.setData('text/plain', `${event.target.innerText},${event.target.id}`);
+function getRandomInt(max) {
+  return Math.floor(Math.random() * Math.floor(max));
 }
 
+function dragStart(event) {
+  event.dataTransfer.setData('text/plain', `${event.target.innerText}|${event.target.id}`);
+}
 init();
