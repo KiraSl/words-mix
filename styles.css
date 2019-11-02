@@ -88,3 +88,23 @@
 .word-drop.drag-over {
   background-color: #e0dfdf;
 }
+
+.modal-overlay {
+  left: 0;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-wrapper {
+  border: 1.5px solid;
+  max-width: 50%;
+  min-width: 350px;
+  padding: 10px 20px;
+  background-color: white;
+}

@@ -90,6 +90,51 @@ function dropWord(event, sentence) {
     }, 500);
   }
   event.target.classList.remove('drag-over');
+  if (!document.querySelector('.words-list').hasChildNodes()) {
+    document.querySelector('.words-wrapper').remove();
+    document.querySelector('.game-area').style.width = '100vw';
+    const modalOverlay = document.createElement('div');
+    modalOverlay.classList.add('modal-overlay');
+
+    const modalWrapper = document.createElement('div');
+    modalWrapper.classList.add('modal-wrapper');
+
+    const filmTitle = document.createElement('h3');
+    filmTitle.innerText = 'Film Title';
+
+    const film = document.createElement('p');
+    film.innerText = 'The Godfather';
+
+    const yearTitle = document.createElement('h3');
+    yearTitle.innerText = 'Year';
+
+    const year = document.createElement('p');
+    year.innerText = '1972';
+
+    const funFactTitle = document.createElement('h3');
+    funFactTitle.innerText = 'Fun Fact';
+
+    const funFact = document.createElement('p');
+    funFact.innerText = 'Some fun fact';
+
+    const restartBtn = document.createElement('button');
+    restartBtn.innerText = 'Play Again';
+    restartBtn.classList.add('button');
+    restartBtn.addEventListener('click', function() {
+      modalOverlay.remove();
+      startGame();
+    });
+
+    modalWrapper.appendChild(filmTitle);
+    modalWrapper.appendChild(film);
+    modalWrapper.appendChild(yearTitle);
+    modalWrapper.appendChild(year);
+    modalWrapper.appendChild(funFactTitle);
+    modalWrapper.appendChild(funFact);
+    modalWrapper.appendChild(restartBtn);
+    modalOverlay.appendChild(modalWrapper);
+    document.querySelector('body').appendChild(modalOverlay);
+  }
 }
 
 function getRandomInt(max) {
