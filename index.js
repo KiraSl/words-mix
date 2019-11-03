@@ -16,8 +16,8 @@ function init() {
 }
 
 function startGame() {
-  const sentence = quotes[getRandomInt(quotes.length)].quote;
-  const wordsArray = randomiseSentence(sentence);
+  const movieObject = quotes[getRandomInt(quotes.length)];
+  const wordsArray = randomiseSentence(movieObject.quote);
   document.querySelector('.container').innerHTML = '';
 
   const gameContainer = document.createElement('div');
@@ -49,7 +49,7 @@ function startGame() {
     wordDrop.addEventListener('dragenter', e => e.target.classList.add('drag-over'));
     wordDrop.addEventListener('dragleave', e => e.target.classList.remove('drag-over'));
     wordDrop.addEventListener('dragover', e => e.preventDefault());
-    wordDrop.addEventListener('drop', event => dropWord(event, sentence));
+    wordDrop.addEventListener('drop', event => dropWord(event, movieObject));
     dropArea.appendChild(wordDrop);
     wordsList.appendChild(listItem);
   });
@@ -66,12 +66,12 @@ const randomiseSentence = function(sentence) {
   return splitSentence.sort(() => Math.random() - 0.5);
 };
 
-function dropWord(event, sentence) {
+function dropWord(event, movieObject) {
   const [draggedWord, draggedID] = event.dataTransfer.getData('text/plain').split('|');
   const dropPosition = event.target.getAttribute('data-drop-position');
   const originalPositions = [];
   const dropBox = event.target;
-  sentence.split(' ').forEach(function(word, index) {
+  movieObject.quote.split(' ').forEach(function(word, index) {
     if (word === draggedWord) {
       originalPositions.push(index);
     }
@@ -103,19 +103,13 @@ function dropWord(event, sentence) {
     filmTitle.innerText = 'Film Title';
 
     const film = document.createElement('p');
-    film.innerText = 'The Godfather';
+    film.innerText = movieObject.filmTitle;
 
     const yearTitle = document.createElement('h3');
     yearTitle.innerText = 'Year';
 
     const year = document.createElement('p');
-    year.innerText = '1972';
-
-    const funFactTitle = document.createElement('h3');
-    funFactTitle.innerText = 'Fun Fact';
-
-    const funFact = document.createElement('p');
-    funFact.innerText = 'Some fun fact';
+    year.innerText = movieObject.year;
 
     const restartBtn = document.createElement('button');
     restartBtn.innerText = 'Play Again';
@@ -129,8 +123,18 @@ function dropWord(event, sentence) {
     modalWrapper.appendChild(film);
     modalWrapper.appendChild(yearTitle);
     modalWrapper.appendChild(year);
-    modalWrapper.appendChild(funFactTitle);
-    modalWrapper.appendChild(funFact);
+
+    if (movieObject.funFact) {
+      const funFactTitle = document.createElement('h3');
+      funFactTitle.innerText = 'Fun Fact';
+
+      const funFact = document.createElement('p');
+      funFact.innerText = movieObject.funFact;
+
+      modalWrapper.appendChild(funFactTitle);
+      modalWrapper.appendChild(funFact);
+    }
+
     modalWrapper.appendChild(restartBtn);
     modalOverlay.appendChild(modalWrapper);
     document.querySelector('body').appendChild(modalOverlay);
