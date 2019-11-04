@@ -58,7 +58,7 @@
 }
 
 .word-drop {
-  width: 90px;
+  min-width: 90px;
   height: 35px;
   border: 2px dashed #9c9c9c;
   background-color: #ececec;
@@ -67,11 +67,13 @@
   justify-content: center;
   align-items: center;
   font-size: 1.4rem;
+  margin: 10px 0;
+  padding: 0 10px;
 }
 
 .word-drop.correct-position {
   background-color: green;
-  border: 1px solid green;
+  border-color: green;
   color: #fff;
 }
 
@@ -83,6 +85,7 @@
   display: flex;
   justify-content: space-around;
   width: 100%;
+  flex-wrap: wrap;
 }
 
 .word-drop.drag-over {
